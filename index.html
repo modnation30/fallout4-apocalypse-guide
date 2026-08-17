@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fallout 4 Apocalypse Guide</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.4; margin: 0; padding: 0; color: #333; background-color: #fafafa; }
+        .content { padding: 40px; max-width: 800px; margin: 0 auto; box-sizing: border-box; width: 100%; }
+        h1 { color: #d63031; border-bottom: 2px solid #d63031; padding-bottom: 5px; font-size: 1.4em; margin: 0; }
+        h2 { color: #2c3e50; margin-top: 20px; font-size: 1.1em; border-bottom: 1px solid #ddd; padding-bottom: 3px; }
+        h3 { color: #e84118; font-size: 0.95em; margin: 10px 0 3px 0; }
+        code { background-color: #f1f2f6; padding: 1px 3px; color: #c23616; font-family: monospace; font-size: 0.9em; }
+        ul, ol { padding-left: 20px; margin: 5px 0; }
+        li { margin-bottom: 4px; font-size: 0.9em; }
+        .box { background-color: #f1f2f6; padding: 8px; border-left: 4px solid #718093; margin: 8px 0; font-size: 0.9em; }
+        .links-box { background-color: #eef2f3; border: 1px solid #b2bec3; padding: 15px; border-radius: 4px; margin-top: 25px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
 
+    <!-- MAIN GUIDE TEXT -->
+    <div class="content">
+        <h1>FALLOUT 4 APOCALYPSE TOOLKIT</h1>
+        <p style="font-size:0.9em; margin: 5px 0 0 0;"><strong>Creation Kit Modding Master Reference Guide.</strong></p>
+        <hr style="border:0; border-top:1px solid #ddd; margin:15px 0;">
+
+        <h2>🛠️ CHAPTER 1: PREPARE YOUR TOOLS</h2>
+        <div class="box">
+            <strong>Platform Rules:</strong>
+            <p style="margin:3px 0 0 0;">PC & Xbox support all custom files. PS5 supports textures/meshes (Max 15 GB, no UI). PS4 allows vanilla asset copies only.</p>
+        </div>
+        <ul>
+            <li><strong>BAE:</strong> Extracts assets from base archives.</li>
+            <li><strong>Paint.NET / GIMP:</strong> Edits asset texture sheets.</li>
+            <li><strong>Creation Kit (CK):</strong> Main game database tool editor.</li>
+            <li><strong>NifSkope:</strong> Adjusts 3D mesh node rendering data.</li>
+        </ul>
+
+        <h2>🖌️ CHAPTER 2: NON-CUSTOM RESKINS (PS4 COMPATIBLE)</h2>
+        <h3>Step 1: Extract Textures</h3>
+        <ol>
+            <li>Open BAE. Load <code>Fallout4 - Textures.ba2</code>.</li>
+            <li>Search for your target item name and extract the <code>_d.dds</code> file.</li>
+        </ol>
+        <h3>Step 2: Add Dirt and Rust</h3>
+        <ol>
+            <li>Open texture in your editor. Overlay a rust image layer.</li>
+            <li>Set layer blend to Multiply. Lower opacity to blend details.</li>
+            <li>Save as DDS with <strong>BC7 Linear</strong> compression. Move to <code>Data\Textures\Apocalypse\</code>.</li>
+        </ol>
+        <h3>Step 3: Creation Kit Link</h3>
+        <ol>
+            <li>In CK, open <code>Miscellaneous > TextureSet</code>. Right-click and select New.</li>
+            <li>Link your texture path. Find your weapon in <code>Items > Weapon</code>.</li>
+            <li>Change its ID to create a duplicate. Swap default texture with your new form. Save your mod.</li>
+        </ol>
+
+        <h2>📐 CHAPTER 3: CUSTOM ASSETS (PC, XBOX, PS5)</h2>
+        <ol>
+            <li>Save your custom mesh asset file to <code>Data\Meshes\Apocalypse\[Name].nif</code>.</li>
+            <li>Open CK. Find a base game weapon or armor template form to clone.</li>
+            <li>Change the ID to a unique name. Click <strong>Model / Art</strong> and load your <code>.nif</code> mesh file. Save.</li>
+        </ol>
+
+        <h2>💡 CHAPTER 4: NIFSKOPE MESH FIXES</h2>
+        <ol>
+            <li>Open your <code>.nif</code> file in NifSkope. Click the item surface.</li>
+            <li>In Block List, select <code>BSLightingShaderProperty</code>. Go to Block Details below.</li>
+            <li>Set <strong>Specular Strength</strong> to <code>1.0</code> or <code>2.0</code>. Set Specular Color to dark grey.</li>
+            <li>Uncheck <code>SF_Own_Emit</code> and <code>SF_Glow_Shader</code> to prevent dark room lighting bugs. Save mesh.</li>
+        </ol>
+
+        <h2>🎒 CHAPTER 5: APOCALYPSE CONFIGURATIONS</h2>
+        <div class="box">
+            <strong>Tuning Summary:</strong>
+            <p style="margin:3px 0 0 0;">Weapons: Change damage, lower Speed to 0.80. Food: Add RadDamageSpell. Ghouls: Set Speed to 135.</p>
+        </div>
+        <ul>
+            <li><strong>Sorting Tags:</strong> Rename items with bracket prefixes like <code>|Scrap|</code> or <code>(Weapon)</code>.</li>
+            <li><strong>Survival:</strong> Tag food with parasite and illness risk parameters inside item menus.</li>
+        </ul>
+
+        <h2>📦 CHAPTER 6: LOOT DROPS & TRADERS</h2>
+        <ul>
+            <li><strong>Loot Lists:</strong> Go to <code>Items > LeveledItem</code>. Open <code>LLI_Raider_Weapons</code> and inject your new weapon ID.</li>
+            <li><strong>Vendors:</strong> Open <code>LL_Vendor_Weapon_General</code> and insert your custom item entry form.</li>
+        </ul>
+
+        <h2>🛠️ CHAPTER 7: WORKBENCH CRAFTING RECIPES</h2>
+        <p>Allow players to build your custom apocalypse weapons and cook raw zombie meat at specialized settlement stations.</p>
+        <ol>
+            <li>In the CK Object Window, navigate to <code>Items > ConstructibleObject</code>. Right-click the grid and select <strong>New</strong>.</li>
+            <li>Assign a recipe identity ID starting with the recipe prefix (e.g., <code>Recipe_Zombie_RustyBat</code>).</li>
+            <li>In the <strong>Required Items</strong> panel on the left, right-click and add your raw components (e.g., select <code>c_steel</code> or <code>c_wood</code> and define their quantities).</li>
+            <li>In the <strong>Created Object</strong> dropdown list on the right, link your custom apocalypse weapon or item form.</li>
+            <li>Set the <strong>Workbench Keyword</strong> to map where it can be crafted:
+                <ul>
+                    <li>For gear: Select <code>WorkshopWeaponWorkbench</code> or <code>WorkshopArmorWorkbench</code>.</li>
+                    <li>For consumables/meat: Select <code>WorkshopCookingStation</code>.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2>🔫 CHAPTER 8: WEAPON AMMUNITION CONFIGURATIONS</h2>
+        <p>Alter what type of custom ammunition casings your improvised weapon targets, or swap clean calibers for scrap variations.</p>
+        <ol>
+            <li>Open your custom weapon profile from the <code>Items > Weapon</code> tree.</li>
+            <li>Locate the <strong>Ammo / Combat</strong> configuration page framework tab.</li>
+            <li>Find the <strong>Ammo</strong> dropdown selection field. Swap standard pristine choices for dirty, scrap calibers (e.g., swap out 5.56mm for <code>Ammo38</code> or a custom radioactive round).</li>
+            <li>To adjust how NPCs use ammo, locate the <strong>Don't Use Ammo</strong> checkbox toggle. Uncheck this box to force survivors and raiders to track their remaining clip counts realistically during a horde scenario.</li>
+        </ol>
+
+        <h2>🔊 CHAPTER 9: CUSTOM VOICE & AUDIO</h2>
+        <h3>Step 1: Background Tracks</h3>
+        <ol>
+            <li>Open MultiXWM. Add your <code>.wav</code> tracks. <span style="font-weight:bold; color:#16a085;">Compress to 48 kbps for music tracks or 32 kbps for wind/drone loops to save console file storage space.</span></li>
+            <li>Click convert. Save into <code>Data\Music\Special\</code>.</li>
+        </ol>
+        <h3>Step 2: Character Voice</h3>
+        <ol>
+            <li>Format voice clip to Mono, 44100Hz, 16-bit WAV.</li>
+            <li>Drag file onto <code>Fallout 4\Tools\Audio\FuzXWM.exe</code> to compile it into a console-safe <code>.fuz</code> file.</li>
+        </ol>
+
+        <h2>🎥 CHAPTER 10: MAIN MENU UI</h2>
+        <ul>
+            <li><strong>PC / Xbox Video:</strong> Compress custom video with RAD Video Tools. Name it <code>MainMenuLoop.bk2</code>. Save in <code>Data\Video\</code>.</li>
+            <li><strong>PlayStation Text:</strong> In CK, open <code>File > Localization > String Editor</code>. Overwrite entry text <code>sMainMenuTitle</code> with: <span style="font-weight:bold; color:#2980b9;">FALLOUT: APOCALYPSE</span>.</li>
+        </ul>
+
+        <h2>🎬 CHAPTER 11: ANIMATED LOADING SCREENS</h2>
+        <ol>
+            <li>In CK, open <code>Miscellaneous > LoadScreen</code>. Right-click and choose New.</li>
+            <li>Click Model and link your custom zombie mesh file.</li>
+            <li>Message details: <span>Tip: Feral Ghouls are faster now. Aim for the legs to slow down the horde.</span></li>
+            <li>Add a new blank condition line. Set the Multiplier setting tracker to 2.0 for random load spawns.</li>
+        </ol>
+
+        <h2>🎨 CHAPTER 12: STOREFRONT ARTWORK DIMENSIONS</h2>
+        <ul>
+            <li><strong>Store Tile Graphic:</strong> Exactly 512 x 512 pixels size square canvas format.</li>
+            <li><strong>Gallery Page Screenshots:</strong> Exactly 1920 x 1080 pixels size landscape image format.</li>
+            <li><strong>Upload:</strong> Log in via CK. Select Upload to Creations. Add artwork and click Publish.</li>
+        </ul>
+
+        <h2>💾 CHAPTER 13: TEXTURE & BUNDLE EXPORTS</h2>
+        <ul>
+            <li><strong>DDS Export:</strong> Use Paint.NET. Save as DDS BC7 Linear. Check Mip Maps box to stop texture flicker.</li>
+            <li><strong>Archive2 Packing:</strong> Open Archive2.exe. Add your Meshes, Interface, Sound, and Music asset folders. Save name string exactly as: [YourModName] - Main.ba2.</li>
+        </ul>
+
+        <div class="links-box">
+            <strong>🌐 Useful Resources & Community Support</strong><br>
+            • Website: yourwebsite.com<br>
+            • YouTube: Modding Tutorials<br>
+            • Discord: Join Support Server<br><br>
